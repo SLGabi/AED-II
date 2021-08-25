@@ -1,22 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void menu(int grafo[20][20]);
+//void menu(int *grafo);
 
 int main(){
-    int grafo[20][20];
+    int tamanho; //o usuario escolhe o tamanho do grafo, até 20
+    printf("Quantas vertices deseja ter?\n");
+    scanf("%d", &tamanho);
+    while(tamanho<=0 || tamanho>20){
+        printf("Quantas vertices deseja ter?\n");
+        scanf("%d", &tamanho);
+    }
 
-    for(int i=0; i<20; i++){ 
-        for(int j=0; j<20; j++){
-            grafo[i][j] = 0; //zerando inicialmente
+    int grafo[tamanho][tamanho], escolha, escolha1, escolha2, opcao, x, y, peso;
+
+    for(int i=0; i<tamanho; i++){
+        for(int j=0; j<tamanho; j++){
+            grafo[i][j] = 0; //zerando as arestas inicialmente
         }
     }
 
-    menu(grafo);
-}
-
-void menu(int grafo[20][20]){
-    int escolha, escolha1, escolha2, opcao, x, y, peso;
+    //--MENU--
     do{
         printf("O que deseja fazer?\n");
         printf("<1>Adicionar uma aresta entre dois vertices\n");
@@ -27,17 +31,16 @@ void menu(int grafo[20][20]){
         //switch case pra escolher os casos
         switch(escolha){
             case 1:
-            printf("Qual o numero do primeiro vertice? Lembre-se, os vertices vao de 0 até 19\n"); //escolhendo o primeiro vertice
+            printf("Qual o numero do primeiro vertice? Lembre-se, os vertices vao de 0 até o tamanho escolhido\n"); //escolhendo o primeiro vertice
             scanf("%d", &x);
-            while(x<0 || x>19) {
+            while(x<0 || x>tamanho) {
                 printf("Digite um numero entre 0 e 19\n");
                 scanf("%d",&x);
             }
-
-            printf("Deseja inserir entre o próximo ou o anterior? <1>Anterior; <2>Próximo\n"); //há duas opções, inserir na aresta com o proximo ou com o anterior
+            printf("Deseja inserir entre o proximo, anterior, ou no proprio vertice? <1>Anterior; <2>Próximo; <3>Proprio vertice\n");
             scanf("%d", &opcao);
-            while(opcao<1 || opcao>2) {
-                printf("Deseja inserir entre o próximo ou o anterior? <1>Proximo; <2>Anterior\n");
+            while(opcao<1 || opcao>3){
+                printf("Deseja inserir entre o proximo, anterior, ou no proprio vertice? <1>Anterior; <2>Próximo; <3>Proprio vertice\n");
                 scanf("%d",&opcao);
             }
 
@@ -50,13 +53,21 @@ void menu(int grafo[20][20]){
                 }
             }
 
-            else{
-                if(x != 19)
+            else if(opcao==2){
+                if(x != tamanho-1)
                     y = x + 1; //se x for diferente de 19, é possível existir a aresta entre o vértice x e o vertice posterior, senao, não é possível, pois o vertice x será o ultimo
                 else{
                     printf("a primeira aresta já é o ultimo vertice. Tente novamente\n");
                     break;
                 }
+            }
+
+            else if(opcao==3){
+                y = x;
+            }
+
+            else{
+                printf("opcao invalida.\n");
             }
 
             if(grafo[x][y] != 0){
@@ -85,8 +96,8 @@ void menu(int grafo[20][20]){
             scanf("%d", &escolha2);
 
             if(escolha2 == 1){ //listando em matriz
-                for(int i = 0; i<20; i++){
-                    for(int j = 0; j < 20; j++) {
+                for(int i = 0; i<tamanho; i++){
+                    for(int j = 0; j < tamanho; j++) {
                         printf("|%d|",grafo[i][j]);
                     }
                     printf("\n");
@@ -94,25 +105,25 @@ void menu(int grafo[20][20]){
             }
 
             else if(escolha2 == 2){ //listando em lista
-                for(int i = 0; i<20; i++){
-                    for(int j = 0; j < 20; j++) {
+                for(int i = 0; i<tamanho; i++){
+                    for(int j = 0; j < tamanho; j++) {
                         printf("vertice %d e vertice %d: %d\n",i, j, grafo[i][j]);
                     }
                 }
             }
 
             else{ //listando específico
-                printf("Qual o numero do primeiro vertice? Lembre-se, os vertices vao de 0 até 19\n"); //escolhendo o primeiro vertice
+                printf("Qual o numero do primeiro vertice? Lembre-se, os vertices vao de 0 até o tamanho escolhido\n"); //escolhendo o primeiro vertice
                 scanf("%d", &x);
-                while(x<0 || x>19) {
+                while(x<0 || x>tamanho) {
                     printf("Digite um numero entre 0 e 19\n");
                     scanf("%d",&x);
                 }
 
-                printf("Deseja inserir entre o próximo ou o anterior? <1>Anterior; <2>Próximo\n"); //há duas opções, inserir na aresta com o proximo ou com o anterior
+                printf("Deseja verificar entre o próximo, anterior, ou no proprio vertice? <1>Anterior; <2>Próximo; <3>Proprio vertice\n"); //há duas opções, inserir na aresta com o proximo ou com o anterior
                 scanf("%d", &opcao);
-                while(opcao<1 || opcao>2) {
-                    printf("Deseja inserir entre o próximo ou o anterior? <1>Proximo; <2>Anterior\n");
+                while(opcao<1 || opcao>3) {
+                    printf("Deseja verificar entre o próximo, anterior, ou no proprio vertice? <1>Proximo; <2>Anterior; <3>Proprio vertice\n");
                     scanf("%d",&opcao);
                 }
 
@@ -125,14 +136,22 @@ void menu(int grafo[20][20]){
                     }
                 }
 
-                else{
-                    if(x != 19)
+                else if(opcao==2){
+                    if(x != tamanho-1)
                         y = x + 1; //se x for diferente de 19, é possível existir a aresta entre o vértice x e o vertice posterior, senao, não é possível, pois o vertice x será o ultimo
                     else{
                         printf("a primeira aresta já é o ultimo vertice. Tente novamente\n");
                         break;
                         
                     }
+                }
+
+                else if (opcao==3){
+                    y = x;
+                }
+
+                else{
+                    printf("opcao invalida.\n");
                 }
 
 
@@ -155,3 +174,4 @@ void menu(int grafo[20][20]){
         }
     }while(escolha!=3);
 }
+
