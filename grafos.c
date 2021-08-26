@@ -23,7 +23,7 @@ int main(){
     //--MENU--
     do{
         printf("O que deseja fazer?\n");
-        printf("<1>Adicionar uma aresta entre dois vertices\n");
+        printf("<1>Adicionar uma aresta\n");
         printf("<2>Listar grafo\n");
         printf("<3>Sair\n");
         scanf("%d", &escolha);
