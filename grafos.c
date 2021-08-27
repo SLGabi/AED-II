@@ -37,7 +37,7 @@ int main(){
                 printf("Qual o numero do primeiro vertice? Lembre-se, os vertices vao de 0 ate o tamanho escolhido - 1\n");
                 scanf("%d",&x);
             }
-            printf("Qual o numero do segundo vertice? Lembre-se, os vertices vao de 0 ate o tamanho escolhido - 1\n"); //escolhendo o primeiro vertice
+            printf("Qual o numero do segundo vertice? Lembre-se, os vertices vao de 0 ate o tamanho escolhido - 1\n"); //escolhendo o segundo vertice
             scanf("%d", &y);
             while(y<0 || y>=tamanho) {
                 printf("Qual o numero do segundo vertice? Lembre-se, os vertices vao de 0 ate o tamanho escolhido - 1\n");
@@ -93,7 +93,7 @@ int main(){
                     scanf("%d",&x);
                 }
 
-                printf("Qual o numero do segundo vertice? Lembre-se, os vertices vao de 0 ate o tamanho escolhido - 1\n"); //escolhendo o primeiro vertice
+                printf("Qual o numero do segundo vertice? Lembre-se, os vertices vao de 0 ate o tamanho escolhido - 1\n"); //escolhendo o segundo vertice
                 scanf("%d", &y);
                 while(y<0 || y>=tamanho) {
                     printf("Qual o numero do segundo vertice? Lembre-se, os vertices vao de 0 ate o tamanho escolhido - 1\n");
